@@ -236,8 +236,11 @@ namespace glm
 		valType const & zFar
 	)
 	{
-		assert(aspect != valType(0));
-		assert(zFar != zNear);
+		// apply sha : 5b911d1eb02b38bc79272532a05ad493c8c34962
+		// available in 0.9.6. 
+		// Consider Reverting when updating
+		assert(abs(aspect - std::numeric_limits<valType>::epsilon()) > static_cast<valType>(0));
+        assert(zFar > zNear);
 
 #ifdef GLM_FORCE_RADIANS
 		valType const rad = fovy;
